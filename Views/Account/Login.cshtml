@@ -1,0 +1,81 @@
+﻿@model LoginViewModel
+
+@{ 
+
+    ViewBag.Title = "User Login";
+
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>USER LOGIN</h2>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+
+                <div class="col-sm-10">
+                    <input asp-for="Email" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Password" class="col-sm-2 col-form-label"></label>
+
+                <div class="col-sm-10">
+                    <input asp-for="Password" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="form-check-label">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayFor(m => m.RememberMe)
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <button type="submit" class="btn btn-secondary"> Create</button>
+            </div>
+            <div class="form-group row">
+                 <a asp-action="ForgotPassword"> Forgot Password</a>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <h2>
+            External Login
+        </h2>
+        <hr />
+        @if (Model.ExternalLogins.Count == 0)
+        {
+            <h3>No external Login configured</h3>
+
+        }
+        else
+        {
+
+            <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                <div>
+                    @foreach (var provider in Model.ExternalLogins)
+                    {
+                        <button type="submit" class="btn btn-primary" name="provider"
+                                value="@provider.Name"
+                                tile="Login using your @provider.DisplayName account">
+                            @provider.DisplayName
+                         </button>
+                    }
+                </div>
+            </form>
+        }
+    </div>
+
+</div>

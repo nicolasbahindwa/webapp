@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Employees>
+ 
+@{ 
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Employee List";
+    
+
+}
+        @*<table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                { 
+                <tr>
+                    <td>@employee.id</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.Email</td>
+                    <td>@employee.Department</td>
+                </tr>
+                }
+            </tbody>
+        </table>*@
+
+        <div class="card card-deck">
+            @foreach (var employee in Model)
+            {
+                var photopath = "~/images/" + (employee.PhotoPath ?? "image.jpg");
+                <div class="card m3" style="min-width:18rem; max-width:30.5%">
+                    <div class="card-header">
+                        <h3>@employee.Name</h3>
+                    </div>
+                    <img class="card-img-top" src="@photopath" asp-append-version="true" width="30" height="300"/>
+                    <div class="card-footer text-center">
+
+                        @*@Url.Action("details","home", new { id = employee.id})
+        @Html.ActionLink("View","details","home", new { id = employee.id})*@
+
+                        <a asp-controller="home" asp-action="details" asp-route-id="@employee.EncryptedId"
+                           class=" btn btn-primary m-1">details</a>
+                        <a asp-controller="home" asp-action="edit" asp-route-id="@employee.id"
+                           class=" btn btn-primary m-1">edit</a>
+                        <a asp-controller="home" asp-action="delete" asp-route-id="@employee.id"
+                           class=" btn btn-danger m-1">delete</a>
+                        
+
+                    </div>
+                </div>
+            }
+            </div>
+
+

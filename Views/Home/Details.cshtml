@@ -1,0 +1,98 @@
+﻿@*@model webapp.Models.Employees*@
+
+@*@model webapp.ViewModels.HomeDetailsViewModels*@
+@model HomeDetailsViewModels
+
+@{
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Employee Details";
+    var photopath = "~/images/" + (Model.Employee.PhotoPath ?? "image.jpg");
+
+}
+
+@* USING VIEWDATA *@
+@*<h3>@ViewData["PageTitle"]</h3>
+
+    @{
+
+        var Employee = ViewData["Employee"] as webapp.Models.Employees;
+    }
+
+    <div>
+        Name = @Employee.Name
+    </div>
+    <div>
+        Email = @Employee.Email
+    </div>
+    <div>
+        Department = @Employee.Department
+    </div>*@
+
+@* VIEWBAGS *@
+
+
+@*<h3>@ViewBag.PageTitle</h3>
+
+    <div>
+        Name = @ViewBag.Employee.Name
+    </div>
+    <div>
+        Email = @ViewBag.Employee.Email
+    </div>
+    <div>
+        Department = @ViewBag.Employee.Department
+    </div>*@
+
+@* Using Strongly typed  *@
+
+@*<h3>@ViewBag.PageTitle</h3>
+
+    <div>
+        Name = @Model.Name
+    </div>
+    <div>
+        Email = @Model.Email;
+    </div>
+    <div>
+        Department = @Model.Department
+    </div>*@
+
+@* USING VIEWMODEL *@
+
+
+<div class="card-deck">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Employee.Name</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top"  src="@photopath"  asp-append-version="true"/>
+                <h4>Employee ID : @Model.Employee.id</h4>
+                <h4>Employee ID : @Model.Employee.Email</h4>
+                <h4>Employee ID : @Model.Employee.Department</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="home" asp-action="index" class=" btn btn-primary m-1">Back</a>
+                <a asp-controller="home" asp-action="edit" asp-route-id="@Model.Employee.id"
+                   class=" btn btn-primary m-1">edit</a>
+                <a asp-controller="home" asp-action="delete" asp-route-id="@Model.Employee.id"
+                   class=" btn btn-danger m-1">delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/js/CustomScript.js"></script>
+}
+
+
+
+
+
+
+
+
